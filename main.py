@@ -1,4 +1,4 @@
-import discord
+import discord, os
 from discord.ext import commands
 from data.secrets import secret
 
@@ -11,7 +11,7 @@ economy.remove_command('help')
 async def on_ready():
     print(f'Logged in as {economy.user}')
 
-cogs = ['cogs.economy']
+cogs = [f'cogs.{cog[:-3]}' for cog in os.listdir('cogs') if cog.endswith('.py') and not cog.startswith('_')]
 
 if __name__ == '__main__':
     for cog in cogs:
